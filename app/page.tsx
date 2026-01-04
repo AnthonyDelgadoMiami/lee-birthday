@@ -5,64 +5,24 @@ import { motion } from 'framer-motion';
 import { Heart, Sparkles, ChevronRight, Camera, Star, Gift, Trophy, ArrowRight, Calendar, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useEffect, useState } from "react";
 
 export default function WelcomePage() {
+
+  const [windowHeight, setWindowHeight] = useState(0);
+
+  useEffect(() => {
+    setWindowHeight(window.innerHeight);
+  }, []);
+
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Cinematic Background Layers */}
       <div className="fixed inset-0 z-0">
         {/* Gradient Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-purple-950 via-rose-950 to-pink-900" />
-        
-        {/* Animated Light Orbs */}
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-gradient-to-r from-pink-500/20 to-rose-500/10"
-            style={{
-              width: `${Math.random() * 300 + 100}px`,
-              height: `${Math.random() * 300 + 100}px`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              x: [0, Math.random() * 100 - 50, 0],
-              y: [0, Math.random() * 100 - 50, 0],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: Math.random() * 20 + 10,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          />
-        ))}
-        
-        {/* Falling Hearts */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(25)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute text-pink-300/30"
-              style={{
-                left: `${Math.random() * 100}%`,
-                fontSize: `${Math.random() * 32 + 16}px`,
-              }}
-              animate={{
-                y: [-100, window.innerHeight + 100],
-                x: [0, Math.random() * 100 - 50],
-                rotate: [0, 360],
-              }}
-              transition={{
-                duration: Math.random() * 15 + 10,
-                repeat: Infinity,
-                delay: Math.random() * 5,
-              }}
-            >
-              ♥
-            </motion.div>
-          ))}
-        </div>
+      
+      
       </div>
 
       {/* Main Content Container */}
