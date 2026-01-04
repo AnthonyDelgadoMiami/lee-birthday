@@ -2,156 +2,200 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Camera, Heart, Star, Smile, ArrowLeft, Image as ImageIcon } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowLeft, ChevronRight } from 'lucide-react';
 
-const memoryCategories = [
+type Memory =
+  | {
+      type: 'single';
+      title: string;
+      date: string;
+      caption: string;
+      image: string;
+    }
+  | {
+      type: 'collection';
+      title: string;
+      date: string;
+      caption: string;
+      images: string[];
+    };
+
+const memories: Memory[] = [
   {
-    category: "Beach Days",
-    icon: <Star className="w-8 h-8" />,
-    description: "Our adventures along the Florida coast",
-    color: "from-blue-400 to-cyan-400",
-    moments: ["Boca Raton Beach", "Sunset walks", "Shell collecting", "Ocean swims"]
+    type: 'collection',
+    title: 'Our first date location',
+    date: 'May 2nd/December 17th 2025',
+    caption:
+      'Where an awkward date made me happy',
+    images: [
+      '/memories/date.jpg',
+      '/memories/date2.jpg',
+      '/memories/date3.jpg',
+      '/memories/date4.jpg',
+      '/memories/date5.jpg',
+      '/memories/date6.jpg',
+      '/memories/date7.jpg',
+    ],
   },
   {
-    category: "Date Nights",
-    icon: <Heart className="w-8 h-8" />,
-    description: "Special evenings out in our city",
-    color: "from-rose-400 to-pink-400",
-    moments: ["Mizner Park dinners", "Movie dates", "Live music", "Dessert runs"]
+    type: 'single',
+    title: 'One of our first photos',
+    date: 'May 23rd 2025',
+    caption:
+      'I didn’t know it then, but this was the beginning of my favorite chapter.',
+    image: '/memories/firstphoto.JPEG',
   },
   {
-    category: "Home Moments",
-    icon: <Smile className="w-8 h-8" />,
-    description: "Cozy times that mean the world",
-    color: "from-amber-400 to-orange-400",
-    moments: ["Sunday mornings", "Cooking together", "Movie marathons", "Rainy days"]
+    type: 'collection',
+    title: 'Beach days',
+    date: 'Summer 2025',
+    caption:
+      'Tanned skin, salty hair, and laughing until we forgot the time (Also getting sleepy). Having you swing around on me in the water',
+    images: [
+      '/memories/beach1.JPEG',
+      '/memories/beach2.JPEG',
+      '/memories/beach3.JPEG',
+    ],
   },
   {
-    category: "Adventures",
-    icon: <Camera className="w-8 h-8" />,
-    description: "Exploring Florida together",
-    color: "from-emerald-400 to-teal-400",
-    moments: ["Day trips", "New restaurants", "Local events", "Nature hikes"]
-  }
+    type: 'collection',
+    title: 'The babies',
+    date: '-',
+    caption:
+      'Kana and Winter are cute babies',
+    images: [
+      '/memories/kw1.JPEG',
+      '/memories/kw2.JPEG',
+      '/memories/kw3.JPEG',
+    ],
+  },
+  {
+    type: 'single',
+    title: 'Home started feeling like us',
+    date: 'November 23nd 2025',
+    caption:
+      'Somehow everything felt lighter once we shared the same space.',
+    image: '/memories/home.JPEG',
+  },
+  {
+    type: 'collection',
+    title: 'Little moments Id never let us forget',
+    date: 'Random days',
+    caption:
+      'No plans. No cameras ready. Just us.',
+    images: [
+      '/memories/random1.JPEG',
+      '/memories/random2.JPEG',
+    ],
+  },
+  
 ];
 
 export default function MemoriesPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-violet-50 to-purple-50 p-6">
+    <div className="min-h-screen bg-[#faf7f5] px-5 py-10">
       {/* Header */}
-      <div className="mb-8">
-        <Link 
-          href="/our-journey" 
-          className="inline-flex items-center gap-2 text-violet-600 hover:text-violet-700 mb-6"
+      <div className="max-w-3xl mx-auto mb-12">
+        <Link
+          href="/our-journey"
+          className="inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 mb-6"
         >
-          <ArrowLeft className="w-5 h-5" />
-          <span>Back</span>
+          <ArrowLeft className="w-4 h-4" />
+          Back
         </Link>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+
+        <motion.h1
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center"
+          className="text-4xl font-serif text-neutral-900 mb-3"
         >
-          <Camera className="w-16 h-16 mx-auto text-purple-500 mb-4" />
-          <h1 className="text-4xl font-bold text-gray-800 mb-3">
-            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600">Treasure Chest</span>
-          </h1>
-          <p className="text-lg text-gray-600">
-            Moments that make our story uniquely ours
-          </p>
-        </motion.div>
+          Our Memories
+        </motion.h1>
+
+        <p className="text-neutral-600 text-lg">
+          Eight months of moments that became my favorite stories.
+        </p>
       </div>
 
-      {/* Memory Categories */}
-      <div className="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
-        {memoryCategories.map((category, index) => (
-          <motion.div
+      {/* Timeline */}
+      <div className="max-w-3xl mx-auto space-y-20">
+        {memories.map((memory, index) => (
+          <motion.section
             key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="bg-white rounded-2xl shadow-lg overflow-hidden"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
           >
-            <div 
-              className={`h-2 bg-gradient-to-r ${category.color}`}
-            />
-            <div className="p-6">
-              <div className="flex items-center gap-4 mb-4">
-                <div className={`p-3 rounded-xl bg-gradient-to-br ${category.color}`}>
-                  <div className="text-white">
-                    {category.icon}
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800">{category.category}</h3>
-                  <p className="text-gray-600">{category.description}</p>
-                </div>
+            {/* Title */}
+            <div>
+              <h2 className="text-2xl font-semibold text-neutral-900">
+                {memory.title}
+              </h2>
+              <p className="text-sm text-neutral-500">{memory.date}</p>
+            </div>
+
+            {/* Images */}
+            {memory.type === 'single' && (
+              <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden">
+                <Image
+                  src={memory.image}
+                  alt={memory.title}
+                  fill
+                  className="object-cover"
+                />
               </div>
-              
-              <div className="grid grid-cols-2 gap-3">
-                {category.moments.map((moment, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${category.color}`} />
-                    <span className="text-gray-700">{moment}</span>
+            )}
+
+            {memory.type === 'collection' && (
+              <div className="grid grid-cols-2 gap-4">
+                {memory.images.map((img, i) => (
+                  <div
+                    key={i}
+                    className="relative aspect-square rounded-xl overflow-hidden"
+                  >
+                    <Image
+                      src={img}
+                      alt={`${memory.title} ${i + 1}`}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                 ))}
               </div>
-            </div>
-          </motion.div>
+            )}
+
+            {/* Caption */}
+            <p className="text-neutral-700 text-base leading-relaxed max-w-xl">
+              {memory.caption}
+            </p>
+          </motion.section>
         ))}
       </div>
 
-      {/* Photo Gallery Placeholder */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="max-w-4xl mx-auto mt-12"
-      >
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
-          <div className="text-center">
-            <ImageIcon className="w-12 h-12 mx-auto text-purple-500 mb-4" />
-            <h3 className="text-2xl font-bold text-gray-800 mb-3">Our Photo Gallery</h3>
-            <p className="text-gray-600 mb-6">
-              This is where our favorite pictures would go!
-            </p>
-            
-            <div className="grid grid-cols-2 gap-4">
-              {[1, 2, 3, 4].map((item) => (
-                <div 
-                  key={item}
-                  className="aspect-square rounded-xl bg-gradient-to-br from-purple-100 to-violet-100 flex items-center justify-center"
-                >
-                  <div className="text-center">
-                    <div className="text-4xl mb-2">📸</div>
-                    <div className="text-sm text-purple-600">Photo {item}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            <p className="text-sm text-gray-500 mt-6">
-              Add your actual photos here by replacing these placeholders!
-            </p>
-          </div>
-        </div>
-      </motion.div>
-
       {/* Navigation */}
-      <div className="flex justify-between mt-12 max-w-4xl mx-auto">
-        <Link
-          href="/our-journey"
-          className="px-6 py-3 bg-white text-gray-700 rounded-full shadow hover:shadow-md transition-shadow"
-        >
-          Back
-        </Link>
+      <div className="flex justify-center mt-24">
         <Link
           href="/surprise"
-          className="px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full shadow hover:shadow-md transition-shadow"
+          className="group relative flex items-center gap-3 bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 px-12 py-4 rounded-full font-semibold text-white shadow-xl hover:shadow-2xl hover:shadow-pink-500/40 transition-all duration-300 overflow-hidden"
         >
-          Next: Your Surprise!
+          {/* Shimmer effect */}
+          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-1000" />
+          
+          {/* Text and icon */}
+          <span className="relative">Surprise incoming</span>
+          <ChevronRight className="w-5 h-5 relative group-hover:translate-x-1 transition-transform duration-300" />
+          
+          {/* Decorative hearts */}
+          <div className="absolute -left-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            ❤️
+          </div>
+          <div className="absolute -right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            ❤️
+          </div>
         </Link>
       </div>
     </div>

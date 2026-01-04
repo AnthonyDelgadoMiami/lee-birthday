@@ -1,168 +1,163 @@
-// app/our-journey/page.tsx
 'use client';
 
 import { motion } from 'framer-motion';
-import { Heart, Coffee, Sunset, Music, Home, Users, ArrowLeft, Calendar } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowLeft, Heart,ChevronRight } from 'lucide-react';
 
-const relationshipMoments = [
-  {
-    year: "When We Met",
-    icon: <Heart className="w-8 h-8" />,
-    description: "That first moment I knew you were special",
-    memories: ["First conversation", "That smile", "Instant connection"]
-  },
-  {
-    year: "Early Days",
-    icon: <Coffee className="w-8 h-8" />,
-    description: "Getting to know each other over coffee dates",
-    memories: ["Long conversations", "Shared laughter", "Discovering common interests"]
-  },
-  {
-    year: "Growing Together",
-    icon: <Users className="w-8 h-8" />,
-    description: "Building our life together in Boca",
-    memories: ["First apartment", "Creating routines", "Supporting each other's dreams"]
-  },
-  {
-    year: "Special Moments",
-    icon: <Sunset className="w-8 h-8" />,
-    description: "Countless beautiful Florida sunsets watched together",
-    memories: ["Beach walks", "Evening drives", "Quiet moments"]
-  },
-  {
-    year: "Our Traditions",
-    icon: <Music className="w-8 h-8" />,
-    description: "The little rituals that make us, us",
-    memories: ["Saturday breakfasts", "Movie nights", "Kitchen dance parties"]
-  },
-  {
-    year: "Future Dreams",
-    icon: <Home className="w-8 h-8" />,
-    description: "All the adventures still ahead of us",
-    memories: ["Travel plans", "Home dreams", "Growing old together"]
-  }
-];
-
-export default function OurJourneyPage() {
+export default function OurLovePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-rose-50 to-pink-50 p-6">
+    <div className="min-h-screen text-white px-6 py-20">
       {/* Header */}
-      <div className="mb-8">
-        <Link 
-          href="/accomplishments" 
-          className="inline-flex items-center gap-2 text-rose-600 hover:text-rose-700 mb-6"
+      <div className="max-w-4xl mx-auto text-center mb-20">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-white/70 hover:text-white mb-12"
         >
           <ArrowLeft className="w-5 h-5" />
-          <span>Back</span>
-        </Link>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center"
-        >
-          <Heart className="w-16 h-16 mx-auto text-rose-500 mb-4 animate-heartbeat" />
-          <h1 className="text-4xl font-bold text-gray-800 mb-3">
-            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-pink-600">Beautiful Story</span>
-          </h1>
-          <p className="text-lg text-gray-600">
-            Every moment with you is a treasure
-          </p>
-        </motion.div>
-      </div>
-
-      {/* Timeline */}
-      <div className="max-w-2xl mx-auto">
-        {relationshipMoments.map((moment, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.15 }}
-            className={`flex ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} items-start mb-8`}
-          >
-            {/* Content */}
-            <div className={`${index % 2 === 0 ? 'mr-4' : 'ml-4'} flex-1`}>
-              <div className="bg-white rounded-2xl shadow-lg p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-3 rounded-xl bg-gradient-to-br from-rose-400 to-pink-400">
-                    <div className="text-white">
-                      {moment.icon}
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-800">{moment.year}</h3>
-                    <p className="text-gray-600">{moment.description}</p>
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  {moment.memories.map((memory, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-pink-400" />
-                      <span className="text-gray-700">{memory}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Timeline Dot */}
-            <div className="relative flex-shrink-0">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-rose-500 to-pink-500" />
-              {index < relationshipMoments.length - 1 && (
-                <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-0.5 h-16 bg-gradient-to-b from-pink-300 to-rose-300" />
-              )}
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Stats Card */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1 }}
-        className="max-w-2xl mx-auto mt-12 bg-gradient-to-r from-rose-500 to-pink-500 rounded-2xl p-8 text-white"
-      >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          <div>
-            <Calendar className="w-8 h-8 mx-auto mb-2" />
-            <div className="text-3xl font-bold">[X]</div>
-            <div className="text-sm">Years Together</div>
-          </div>
-          <div>
-            <Heart className="w-8 h-8 mx-auto mb-2" />
-            <div className="text-3xl font-bold">Countless</div>
-            <div className="text-sm">Laughs Shared</div>
-          </div>
-          <div>
-            <Sunset className="w-8 h-8 mx-auto mb-2" />
-            <div className="text-3xl font-bold">Hundreds</div>
-            <div className="text-sm">Sunsets Watched</div>
-          </div>
-          <div>
-            <Coffee className="w-8 h-8 mx-auto mb-2" />
-            <div className="text-3xl font-bold">Infinite</div>
-            <div className="text-sm">Cups of Coffee</div>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Navigation */}
-      <div className="flex justify-between mt-12 max-w-2xl mx-auto">
-        <Link
-          href="/accomplishments"
-          className="px-6 py-3 bg-white text-gray-700 rounded-full shadow hover:shadow-md transition-shadow"
-        >
           Back
         </Link>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-5xl md:text-6xl font-bold mb-6"
+          style={{ fontFamily: 'var(--font-dancing)' }}
+        >
+          My Heart
+        </motion.h1>
+
+        <p className="text-xl text-white/75 max-w-2xl mx-auto leading-relaxed">
+          My Heart is yours and yours alone,
+          I Love you
+        </p>
+      </div>
+
+      {/* SECTION: Milestone */}
+      <section className="max-w-5xl mx-auto mb-28">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="bg-white/5 border border-white/10 rounded-3xl p-10 backdrop-blur-md"
+        >
+          <h2 className="text-3xl font-semibold mb-6 text-pink-300">
+            We Built a Life Together
+          </h2>
+
+          <p className="text-lg text-white/85 leading-relaxed">
+            It wasn't just talking about building a life, it wasn't just working to build a life, it wasn't moving in, and it wasn't all those dates.
+            It is you, you are my Life, we are building a life together, I never want you to forget I am always in your corner.
+          </p>
+
+          <p className="mt-6 text-white/70 italic">
+            “Home stopped being a place. It became you.” -Lee
+          </p>
+        </motion.div>
+      </section>
+
+      {/* SECTION: Photo Memories */}
+      <section className="max-w-6xl mx-auto mb-32">
+        <h2 className="text-3xl font-semibold text-center mb-12">
+          Moments That Became Us
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {['/us-1.JPEG', '/us-2.JPEG', '/us-3.JPEG'].map((src, i) => (
+            <motion.div
+              key={src}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15 }}
+              className="relative h-[320px] rounded-3xl overflow-hidden shadow-2xl"
+            >
+              <Image
+                src={src}
+                alt="Us"
+                fill
+                className="object-cover"
+              />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION: Letters */}
+      <section className="max-w-4xl mx-auto mb-32">
+        <h2 className="text-3xl font-semibold text-center mb-14">
+          Letter for my Lee
+        </h2>
+
+        {[1].map((_, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16 bg-[#1e0028]/50 border border-white/10 rounded-3xl p-10"
+          >
+            <p className="text-sm text-pink-300 mb-4">
+              When you need Love,
+            </p>
+
+            <p className="text-lg text-white/85 leading-relaxed">
+              {/* WRITE YOUR LETTER HERE */}
+              My Dearest Lee,
+              <br /><br />
+              When you need Love from me, remember that I would do anything for you,
+
+              I am always going to give you all the Love I can offer, I can only ever hope it's enough
+
+              You can always text or call me if and when you need me, I will be there, I want to give you the world
+              </p>
+
+            <p className="mt-8 text-right text-white/60 italic">
+              — Forever yours,
+
+                Tonio
+            </p>
+          </motion.div>
+        ))}
+      </section>
+
+      {/* SECTION: Closing */}
+      <section className="max-w-3xl mx-auto text-center">
+        <Heart className="w-12 h-12 text-pink-400 mx-auto mb-6" />
+
+        <h2 className="text-3xl font-bold mb-6">
+          Happy Birthday, My Love
+        </h2>
+
+        <p className="text-xl text-white/80 leading-relaxed">
+          Hopefully this was a nice and romantic page for you
+        </p>
+
+        <p className="mt-10 text-2xl text-pink-300 italic">
+          I Love you all of it.
+        </p>
+      </section>
+      
+      {/* Navigation */}
+      <div className="flex justify-center mt-24">
         <Link
           href="/memories"
-          className="px-6 py-3 bg-gradient-to-r from-purple-500 to-violet-500 text-white rounded-full shadow hover:shadow-md transition-shadow"
+          className="group relative flex items-center gap-3 bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 px-12 py-4 rounded-full font-semibold text-white shadow-xl hover:shadow-2xl hover:shadow-pink-500/40 transition-all duration-300 overflow-hidden"
         >
-          Next: Our Memories
+          {/* Shimmer effect */}
+          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-1000" />
+          
+          {/* Text and icon */}
+          <span className="relative">Memories</span>
+          <ChevronRight className="w-5 h-5 relative group-hover:translate-x-1 transition-transform duration-300" />
+          
+          {/* Decorative hearts */}
+          <div className="absolute -left-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            ❤️
+          </div>
+          <div className="absolute -right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            ❤️
+          </div>
         </Link>
       </div>
     </div>

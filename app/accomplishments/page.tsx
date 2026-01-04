@@ -1,138 +1,204 @@
-// app/accomplishments/page.tsx
 'use client';
 
 import { motion } from 'framer-motion';
-import { Trophy, GraduationCap, Briefcase, Star, Award, Target, ArrowLeft, CheckCircle } from 'lucide-react';
+import {
+  GraduationCap,
+  Briefcase,
+  Target,
+  Award,
+  Heart,
+  ArrowLeft,
+  ChevronRight,
+} from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const accomplishments = [
   {
-    icon: <GraduationCap className="w-8 h-8" />,
-    title: "Academic Success",
-    description: "Graduated with honors in [Her Field], showing incredible dedication",
-    details: ["Maintained 4.0 GPA", "Published research", "Academic awards"]
+    title: 'Academia',
+    description:
+      'Your discipline and focus through school showed a strength most people never develop.',
+    details: [
+      'Focused and hardworking',
+      'Leadership in extracurriculars',
+      'Graduated with pride',
+    ],
+    icon: GraduationCap,
+    image: '/academia.JPEG',
   },
   {
-    icon: <Briefcase className="w-8 h-8" />,
-    title: "Career Growth",
-    description: "Rapid promotion at work, leading important projects with excellence",
-    details: ["Lead major projects", "Mentored team members", "Exceeded all targets"]
+    title: 'Professional Growth',
+    description:
+      'Watching you step confidently into your career while still a student was inspiring.',
+    details: [
+      'Promoted to full-time',
+      'Recognized for excellence',
+      'Natural leader and collaborator',
+    ],
+    icon: Briefcase,
+    image: '/prof.JPEG',
   },
   {
-    icon: <Target className="w-8 h-8" />,
-    title: "Personal Goals",
-    description: "Achieved [specific personal goal], showing incredible determination",
-    details: ["Ran first marathon", "Learned new language", "Mastered new skill"]
+    title: 'Personal Triumphs',
+    description:
+      'Your courage to chase life experiences speaks volumes about who you are.',
+    details: [
+      'Traveled across Japan & Vietnam',
+      'Mastered AutoCAD',
+      'Passionate rock climber',
+    ],
+    icon: Target,
+    image: '/japan.JPEG',
   },
   {
-    icon: <Award className="w-8 h-8" />,
-    title: "Skills Mastered",
-    description: "Became proficient in multiple areas while balancing everything else",
-    details: ["Public speaking", "Leadership", "Technical expertise"]
+    title: 'Skills & Talents',
+    description:
+      'You learn with grace, curiosity, and an artist’s heart.',
+    details: [
+      'Rapidly learned Spanish',
+      'Emotionally intelligent communicator',
+      'Incredible artist and painter',
+    ],
+    icon: Award,
+    image: '/skill.JPEG',
   },
   {
-    icon: <Star className="w-8 h-8" />,
-    title: "Community Impact",
-    description: "Made a real difference through volunteer work and kindness",
-    details: ["Volunteer hours", "Charity events", "Community leadership"]
+    title: 'Heart of Gold',
+    description:
+      'Your kindness leaves a mark on everyone lucky enough to know you.',
+    details: [
+      'Always supports friends',
+      'Cares deeply for those she loves',
+      'Endless compassion',
+    ],
+    icon: Heart,
+    image: '/heart.JPEG',
   },
-  {
-    icon: <Trophy className="w-8 h-8" />,
-    title: "Overcoming Challenges",
-    description: "Faced difficulties with incredible strength and grace",
-    details: ["Perseverance", "Resilience", "Positive attitude"]
-  }
 ];
 
 export default function AccomplishmentsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-cyan-50 p-6">
+    <div className="min-h-screen bg-gradient-to-b  px-6 py-16 text-white">
       {/* Header */}
-      <div className="mb-8">
-        <Link 
-          href="/" 
-          className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-6"
+      <div className="max-w-5xl mx-auto text-center mb-20">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-white/70 hover:text-white mb-10"
         >
           <ArrowLeft className="w-5 h-5" />
-          <span>Back</span>
+          Back
         </Link>
-        
-        <motion.div
+
+        <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center"
+          className="text-5xl md:text-6xl font-bold mb-6"
+          style={{ fontFamily: 'var(--font-dancing)' }}
         >
-          <Trophy className="w-16 h-16 mx-auto text-amber-500 mb-4" />
-          <h1 className="text-4xl font-bold text-gray-800 mb-3">
-            Celebrating Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">Incredible Journey</span>
-          </h1>
-          <p className="text-lg text-gray-600">
-            I'm so proud of everything you've accomplished
-          </p>
-        </motion.div>
+          My Amazing Girl
+        </motion.h1>
+
+        <p className="text-xl text-white/80 max-w-2xl mx-auto">
+          A quiet celebration of everything you are — and everything you’ve
+          become.
+        </p>
       </div>
 
-      {/* Accomplishments Grid */}
-      <div className="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
-        {accomplishments.map((item, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="bg-white rounded-2xl shadow-lg overflow-hidden"
-          >
-            <div className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500">
-                  <div className="text-white">
-                    {item.icon}
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">{item.title}</h3>
-                  <p className="text-gray-600 mb-4">{item.description}</p>
-                  
-                  <div className="space-y-2">
-                    {item.details.map((detail, i) => (
-                      <div key={i} className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-green-500" />
-                        <span className="text-sm text-gray-700">{detail}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+      {/* Accomplishments */}
+      <div className="max-w-6xl mx-auto space-y-20">
+        {accomplishments.map((item, index) => {
+          const Icon = item.icon;
+
+          return (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="grid md:grid-cols-2 gap-10 items-center"
+            >
+              {/* Image */}
+              <div className="relative w-full h-[320px] rounded-3xl overflow-hidden shadow-2xl">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover"
+                  priority={index === 0}
+                />
               </div>
-            </div>
-          </motion.div>
-        ))}
+
+              {/* Text */}
+              <div>
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="p-3 rounded-full bg-white/10">
+                    <Icon className="w-6 h-6 text-pink-300" />
+                  </div>
+                  <h2 className="text-3xl font-semibold">{item.title}</h2>
+                </div>
+
+                <p className="text-white/80 mb-6 text-lg">
+                  {item.description}
+                </p>
+
+                <ul className="space-y-3">
+                  {item.details.map((detail) => (
+                    <li
+                      key={detail}
+                      className="flex items-center gap-3 text-white/90"
+                    >
+                      <span className="w-2 h-2 rounded-full bg-pink-400" />
+                      {detail}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
 
-      {/* Quote */}
+      {/* Final Message */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.8 }}
-        className="max-w-2xl mx-auto mt-12 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-2xl p-6"
+        className="max-w-4xl mx-auto mt-32 text-center"
       >
-        <p className="text-xl italic text-gray-700 text-center">
-          "Every day, you continue to amaze me with your strength, intelligence, and kindness."
+        <Heart className="w-12 h-12 text-pink-400 mx-auto mb-6" />
+        <h2 className="text-3xl font-bold mb-6">
+          You Are My Greatest Pride
+        </h2>
+        <p className="text-xl text-white/80 leading-relaxed">
+          Every accomplishment matters, but who you are while achieving them
+          matters even more. I Love to see the kind of person you are/have grown into
+        </p>
+        <p className="mt-8 text-2xl text-pink-300 italic">
+          “Loving you is my proudest achievement.”
         </p>
       </motion.div>
 
       {/* Navigation */}
-      <div className="flex justify-between mt-12 max-w-4xl mx-auto">
-        <Link
-          href="/"
-          className="px-6 py-3 bg-white text-gray-700 rounded-full shadow hover:shadow-md transition-shadow"
-        >
-          Back Home
-        </Link>
+      <div className="flex justify-center mt-24">
         <Link
           href="/our-journey"
-          className="px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full shadow hover:shadow-md transition-shadow"
+          className="group relative flex items-center gap-3 bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 px-12 py-4 rounded-full font-semibold text-white shadow-xl hover:shadow-2xl hover:shadow-pink-500/40 transition-all duration-300 overflow-hidden"
         >
-          Next: Our Journey
+          {/* Shimmer effect */}
+          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-1000" />
+          
+          {/* Text and icon */}
+          <span className="relative">My heart</span>
+          <ChevronRight className="w-5 h-5 relative group-hover:translate-x-1 transition-transform duration-300" />
+          
+          {/* Decorative hearts */}
+          <div className="absolute -left-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            ❤️
+          </div>
+          <div className="absolute -right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            ❤️
+          </div>
         </Link>
       </div>
     </div>
